@@ -1,0 +1,6 @@
+﻿_build*.py
+_gen*.py
+_patch*.py
+*.pyc
+__pycache__/
+.DS_Store

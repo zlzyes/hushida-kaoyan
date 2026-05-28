@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>湖师大马克思专业考研备考</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="app-layout">
+    <button class="nav-toggle" id="nav-toggle" aria-label="菜单">&#9776;</button>
+    <div class="nav-overlay" id="nav-overlay"></div>
+
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-brand">
+        <h1>湖师大马克思考研</h1>
+        <div class="brand-sub">Hunan Normal University · Marxism</div>
+      </div>
+      <nav class="sidebar-nav">
+        <button class="nav-item active" data-page="dashboard">
+          <span class="nav-icon">&#9733;</span> 备考仪表盘
+        </button>
+        <button class="nav-item" data-page="courses">
+          <span class="nav-icon">&#128218;</span> 专业课
+        </button>
+        <button class="nav-item" data-page="public">
+          <span class="nav-icon">&#9999;</span> 英语 / 政治
+        </button>
+        <button class="nav-item" data-page="mock">
+          <span class="nav-icon">&#128203;</span> 模拟试题
+        </button>
+        <button class="nav-item" data-page="papers">
+          <span class="nav-icon">&#128196;</span> 历年真题
+        </button>
+        <button class="nav-item" data-page="timeline">
+          <span class="nav-icon">&#128197;</span> 备考时间线
+        </button>
+      </nav>
+      <div class="sidebar-footer">
+        海南师大编导 → 湖师大马克思<br>2026年6月开始备考
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <div class="page active" id="page-dashboard"><!-- JS 渲染 --></div>
+
+      <div class="page" id="page-courses">
+        <div class="sub-tabs">
+          <button class="sub-tab active" data-page="courses" data-sub="ma-yuan">&#128216; 马原</button>
+          <button class="sub-tab" data-page="courses" data-sub="mao-gai">&#128217; 毛概</button>
+          <button class="sub-tab" data-page="courses" data-sub="xi-si">&#128215; 习思</button>
+        </div>
+      </div>
+
+      <div class="page" id="page-public"><!-- JS 渲染 --></div>
+
+      <div class="page" id="page-mock"><!-- JS 渲染 --></div>
+
+      <div class="page" id="page-mistakes"><!-- JS ?? --></div>
+
+      <div class="page" id="page-papers">
+        <div class="papers-filters">
+          <select id="paper-year-filter"><option value="all">全部年份</option></select>
+          <select id="paper-type-filter"><option value="all">全部题型</option></select>
+        </div>
+      </div>
+
+      <div class="page" id="page-timeline">
+        <h2 class="page-title">&#128197; 备考时间线（2026年6月—12月）</h2>
+        <div class="timeline-container"></div>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/data/ma-yuan.js"></script>
+  <script src="js/data/mao-gai.js"></script>
+  <script src="js/data/xi-si.js"></script>
+  <script src="js/data/english.js"></script>
+  <script src="js/data/politics.js"></script>
+  <script src="js/data/papers.js"></script>
+  <script src="js/data/mock-exams.js"></script>
+  <script src="js/mindmap.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var yearFilter = document.getElementById('paper-year-filter');
+      if (yearFilter) {
+        for (var i = 0; i < PapersData.yearsList.length; i++) {
+          var opt = document.createElement('option');
+          opt.value = PapersData.yearsList[i];
+          opt.textContent = PapersData.yearsList[i] + '年';
+          yearFilter.appendChild(opt);
+        }
+      }
+      var typeFilter = document.getElementById('paper-type-filter');
+      if (typeFilter) {
+        for (var j = 0; j < PapersData.questionTypes.length; j++) {
+          var opt2 = document.createElement('option');
+          opt2.value = PapersData.questionTypes[j];
+          opt2.textContent = PapersData.questionTypes[j];
+          typeFilter.appendChild(opt2);
+        }
+      }
+      App.init();
+    });
+  </script>
+</body>
+</html>
+
