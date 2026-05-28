@@ -234,7 +234,9 @@ var App = {
     h += '</div></div><div class="tips-section"><h3>💡 备考提示</h3><ul>';
     for (var tp = 0; tp < eng.tips.length; tp++) h += '<li>' + eng.tips[tp] + '</li>';
     h += '</ul></div></div>';
-
+    h += '<details class="templates-details" style="margin-bottom:18px"><summary class="templates-summary">🔬 颉斌斌66句长难句（点击展开）</summary>';
+    h += '<div class="sentences-intro"><p>颉斌斌老师精选66个考研真题长难句，覆盖名词性从句、定语从句、状语从句、倒装、省略、分隔结构。跨考建议：第一轮逐句精析（21天/每天3-4句），第二轮快速复习，第三轮脱口翻译。</p></div>';
+    h += '<div class="sentences-list" id="sentences-list"></div></details>';
 
     h += '<div class="public-section"><h2 class="page-title">🇨🇳 ' + pol.overview.title + '</h2>';
     h += '<div class="exam-info-bar">';
@@ -513,6 +515,22 @@ var App = {
     if (history[pid].length > 10) history[pid] = history[pid].slice(-10);
     Storage.save('scoreHistory', history);
     this._renderScoreHistory(pid);
+  },
+
+  _renderLongSentences: function() {
+    var c = document.getElementById('sentences-list');
+    if (!c || typeof LongSentencesData === 'undefined') return;
+    var h = '';
+    for (var i = 0; i < LongSentencesData.length; i++) {
+      var s = LongSentencesData[i];
+      h += '<div class="sentence-card">';
+      h += '<div class="sentence-header"><span class="sentence-num">第' + s[0] + '句</span><div class="sentence-tags">';
+      for (var k = 0; k < s[4].length; k++) h += '<span class="tag">' + s[4][k] + '</span>';
+      h += '</div></div><p class="sentence-en">' + s[1] + '</p>';
+      h += '<div class="sentence-analysis"><strong>结构分析：</strong>' + s[2] + '</div>';
+      h += '<div class="sentence-cn"><strong>参考译文：</strong>' + s[3] + '</div></div>';
+    }
+    c.innerHTML = h;
   },
 
   _renderMistakeBook: function() {
