@@ -273,6 +273,7 @@ var App = {
     h += '</ul></div></div>';
 
     c.innerHTML = h;
+    setTimeout(function() { App._renderLongSentences(); }, 100);
   },
   _renderPapers: function() {
     var c = document.getElementById('page-papers'); if (!c) return;

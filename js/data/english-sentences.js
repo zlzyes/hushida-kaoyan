@@ -1,7 +1,7 @@
-// 颉斌斌66句考研英语长难句
+﻿// 颉斌斌66句考研英语长难句
 // 来源：历年真题精选 + 结构分析 + 中文翻译
 // 每句格式：[序号, 英文, 结构分析, 中文翻译, [关键词]]
-const LongSentencesData = [
+var LongSentencesData = [
   [1,"The American economic system is organized around a basically private-enterprise, market-oriented economy in which consumers largely determine what shall be produced by spending their money in the marketplace for those goods and services that they want most.","主句→定语从句(in which)→宾语从句(what)+定语从句(that)","美国经济体系围绕基本私有企业、市场导向的经济组织起来，消费者通过在市场上花钱购买最想要的商品和服务，很大程度上决定了应该生产什么。",["private-enterprise", "market-oriented", "consumers determine"]],
   [2,"Thus, in the American economic system it is the demand of individual consumers, coupled with the desire of businessmen to maximize profits and the desire of individuals to maximize their incomes, that together determine what shall be produced and how resources are used to produce it.","强调句it is...that...→coupled with...→what...and how...","在美国经济体系中，个体消费者的需求加上商人追求利润最大化和个体追求收入最大化的欲望，共同决定了应该生产什么以及如何利用资源来生产。",["coupled with", "maximize profits", "incomes"]],
   [3,"If, on the other hand, producing more of a commodity results in reducing its cost, this will tend to increase the supply offered by seller-producers, which in turn will lower the price and permit more consumers to buy the product.","条件If producing...→主句→which定语从句→并列lower...and permit...","如果生产更多商品导致成本降低，这将倾向于增加卖方生产者提供的供应量，这反过来会降低价格并允许更多消费者购买该产品。",["results in", "in turn", "permit...to"]],
@@ -69,3 +69,4 @@ const LongSentencesData = [
   [65,"The overall result has been to make entrance to professional geological journals harder for amateurs—a result that has been reinforced by the widespread introduction of refereeing.","主句result has been to make...→破折号同位语a result→that定语","总体结果是使业余爱好者更难进入专业地质期刊——这一结果因广泛引入审稿制度而加强。",["entrance to", "reinforced by", "refereeing"]],
   [66,"Thus, in the American economic system it is the demand of individual consumers, coupled with the desire of businessmen to maximize profits and the desire of individuals to maximize their incomes, that together determine what shall be produced and how resources are used.","强调句it is...that...→coupled with...and...→what...and how...","因此在美国经济体系中是个体消费者的需求加上商人追求利润最大化和个体追求收入最大化的欲望共同决定了应该生产什么以及如何利用资源。",["coupled with", "maximize", "what shall be produced"]]
 ];
+
