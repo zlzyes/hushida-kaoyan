@@ -482,3 +482,23 @@ button { cursor: pointer; border: none; background: none; font: inherit; color: 
 
 /* === Papers Mistake Star === */
 .question-header .mistake-star { margin: 0 4px; }
+
+/* === 66 Long Sentences === */
+.sentences-intro { margin-bottom: 12px; }
+.sentences-intro p { font-size: 0.82rem; color: var(--color-text-secondary); line-height: 1.7; }
+.sentences-list { display: flex; flex-direction: column; gap: 10px; max-height: 600px; overflow-y: auto; padding-right: 4px; }
+.sentence-card { background: var(--color-bg); border-radius: var(--radius); padding: 14px 16px; border-left: 3px solid var(--color-primary); transition: border-color var(--transition-fast); }
+.sentence-card:hover { border-left-color: #2c5282; }
+.sentence-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; flex-wrap: wrap; }
+.sentence-num { font-size: 0.78rem; font-weight: 700; color: var(--color-primary); }
+.sentence-tags { display: flex; gap: 3px; flex-wrap: wrap; }
+.sentence-en { font-size: 0.84rem; line-height: 1.7; color: var(--color-text); margin-bottom: 8px; font-family: "Georgia",serif; }
+.sentence-analysis { font-size: 0.76rem; color: var(--color-text-muted); margin-bottom: 6px; line-height: 1.6; }
+.sentence-analysis strong { color: var(--color-warning); }
+.sentence-cn { font-size: 0.8rem; color: var(--color-text-secondary); line-height: 1.65; }
+.sentence-cn strong { color: var(--color-success); }
+
+@media (max-width: 900px) {
+  .sentences-list { max-height: 400px; }
+  .sentence-en { font-size: 0.8rem; }
+}

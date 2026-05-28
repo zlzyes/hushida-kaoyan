@@ -202,6 +202,7 @@ var App = {
       h += '</ul></div>';
     }
     c.innerHTML = h;
+    setTimeout(function() { App._renderLongSentences(); }, 50);
   },
   _renderPublicPage: function() {
     var c = document.getElementById('page-public'); if (!c) return;
@@ -234,6 +235,11 @@ var App = {
     h += '</div></div><div class="tips-section"><h3>💡 备考提示</h3><ul>';
     for (var tp = 0; tp < eng.tips.length; tp++) h += '<li>' + eng.tips[tp] + '</li>';
     h += '</ul></div></div>';
+    h += '<div class="public-section"><details class="templates-details"><summary class="templates-summary">🔬 颉斌斌66句长难句（点击展开）</summary>';
+    h += '<div class="sentences-intro"><p>颉斌斌老师精选的66个考研英语长难句，覆盖名词性从句、定语从句、状语从句、倒装、省略、分隔结构等所有类型。跨考生建议：第一轮逐句精析（21天），第二轮快速复习，第三轮脱口翻译。</p></div>';
+    h += '<div class="sentences-list" id="sentences-list"></div></details></div>';
+
+    
 
     h += '<div class="public-section"><h2 class="page-title">🇨🇳 ' + pol.overview.title + '</h2>';
     h += '<div class="exam-info-bar">';
@@ -268,7 +274,13 @@ var App = {
     h += '</div></div><div class="tips-section"><h3>💡 备考提示</h3><ul>';
     for (var tp2 = 0; tp2 < pol.tips.length; tp2++) h += '<li>' + pol.tips[tp2] + '</li>';
     h += '</ul></div></div>';
+    h += '<div class="public-section"><details class="templates-details"><summary class="templates-summary">🔬 颉斌斌66句长难句（点击展开）</summary>';
+    h += '<div class="sentences-intro"><p>颉斌斌老师精选的66个考研英语长难句，覆盖名词性从句、定语从句、状语从句、倒装、省略、分隔结构等所有类型。跨考生建议：第一轮逐句精析（21天），第二轮快速复习，第三轮脱口翻译。</p></div>';
+    h += '<div class="sentences-list" id="sentences-list"></div></details></div>';
+
+    
     c.innerHTML = h;
+    setTimeout(function() { App._renderLongSentences(); }, 50);
   },
   _renderPapers: function() {
     var c = document.getElementById('page-papers'); if (!c) return;
@@ -513,6 +525,25 @@ var App = {
     this._renderScoreHistory(pid);
   },
 
+  _renderLongSentences: function() {
+    var container = document.getElementById('sentences-list');
+    if (!container || typeof LongSentencesData === 'undefined') return;
+    var html = '';
+    for (var i = 0; i < LongSentencesData.length; i++) {
+      var s = LongSentencesData[i];
+      html += '<div class="sentence-card">';
+      html += '<div class="sentence-header"><span class="sentence-num">第' + s[0] + '句</span>';
+      html += '<div class="sentence-tags">';
+      for (var k = 0; k < s[4].length; k++) html += '<span class="tag">' + s[4][k] + '</span>';
+      html += '</div></div>';
+      html += '<p class="sentence-en">' + s[1] + '</p>';
+      html += '<div class="sentence-analysis"><strong>结构分析：</strong>' + s[2] + '</div>';
+      html += '<div class="sentence-cn"><strong>参考译文：</strong>' + s[3] + '</div>';
+      html += '</div>';
+    }
+    container.innerHTML = html;
+  },
+
   _renderMistakeBook: function() {
     var c = document.getElementById('page-mistakes'); if (!c) return;
     var list = MistakeBook.getList();
@@ -548,6 +579,7 @@ var App = {
       h += '</ul></div></div></div>';
     }
     c.innerHTML = h;
+    setTimeout(function() { App._renderLongSentences(); }, 50);
   }
 };
 
