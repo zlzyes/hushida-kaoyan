@@ -94,13 +94,14 @@ var App = {
       navItems[i].classList.toggle('active', navItems[i].dataset.page === page || (page === 'courses' && navItems[i].dataset.page === 'courses'));
     var pages = document.querySelectorAll('.page');
     for (var j = 0; j < pages.length; j++) pages[j].classList.remove('active');
-    var pm = {'dashboard':'page-dashboard','courses':'page-courses','public':'page-public','papers':'page-papers','mock':'page-mock','timeline':'page-timeline','mistakes':'page-mistakes'};
+    var pm = {'dashboard':'page-dashboard','courses':'page-courses','public':'page-public','framework':'page-framework','papers':'page-papers','mock':'page-mock','timeline':'page-timeline','mistakes':'page-mistakes'};
     var tid = pm[page]; if (tid) { var t = document.getElementById(tid); if (t) t.classList.add('active'); }
     if (this.mockTimer) { clearInterval(this.mockTimer); this.mockTimer = null; }
     switch (page) {
       case 'dashboard': this._renderDashboard(); break;
       case 'courses': this._renderCoursesPage(); break;
       case 'public': this._renderPublicPage(); break;
+      case 'framework': this._renderFramework(); break;
       case 'papers': this._renderPapers(); break;
       case 'mock': this._renderMockPage(); break;
       case 'timeline': this._renderTimeline(); break;
@@ -275,6 +276,68 @@ var App = {
     c.innerHTML = h;
     setTimeout(function() { App._renderLongSentences(); }, 100);
   },
+  _renderFramework: function() {
+    var c = document.getElementById('page-framework'); if (!c) return;
+    if (typeof FrameworkData === 'undefined') { c.innerHTML = '<div class="empty-state">框架数据加载中...</div>'; return; }
+    c.innerHTML = '<div class="fw-container"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px"><h2 class="page-title" style="margin-bottom:0">📚 考研政治背诵知识框架</h2><input type="text" class="fw-search-box" id="fw-search" placeholder="🔍 搜索关键词..." oninput="App._fwSearch()"></div>' + FrameworkData + '</div>';
+    setTimeout(function() { App._fwBindClicks(); }, 50);
+  },
+
+  _fwBindClicks: function() {
+    var container = document.querySelector('.fw-container'); if (!container) return;
+    var books = container.querySelectorAll('.fw-book-header');
+    for (var i = 0; i < books.length; i++) {
+      books[i].onclick = function() { this.parentElement.classList.toggle('open'); };
+    }
+    var chapters = container.querySelectorAll('.fw-chapter-header');
+    for (var j = 0; j < chapters.length; j++) {
+      chapters[j].onclick = function(e) { e.stopPropagation(); this.parentElement.classList.toggle('open'); };
+    }
+    var sections = container.querySelectorAll('.fw-section-header');
+    for (var k = 0; k < sections.length; k++) {
+      sections[k].onclick = function(e) { e.stopPropagation(); this.parentElement.classList.toggle('open'); };
+    }
+    var btns = container.querySelectorAll('.fw-toolbar button');
+    for (var b = 0; b < btns.length; b++) {
+      btns[b].onclick = function() {
+        var book = this.closest('.fw-book'); if (!book) return;
+        var expand = this.textContent.indexOf('展开') >= 0;
+        var chs = book.querySelectorAll('.fw-chapter');
+        var secs = book.querySelectorAll('.fw-section');
+        for (var x = 0; x < chs.length; x++) chs[x].classList.toggle('open', expand);
+        for (var y = 0; y < secs.length; y++) secs[y].classList.toggle('open', expand);
+        var all = this.parentElement.querySelectorAll('button');
+        for (var z = 0; z < all.length; z++) all[z].classList.remove('on');
+        this.classList.add('on');
+      };
+    }
+  },
+
+  _fwSearch: function() {
+    var input = document.getElementById('fw-search'); if (!input) return;
+    var query = input.value.trim().toLowerCase();
+    var bullets = document.querySelectorAll('.fw-bullet');
+    for (var i = 0; i < bullets.length; i++) {
+      var b = bullets[i]; b.classList.remove('match');
+      if (query && b.textContent.toLowerCase().indexOf(query) >= 0) {
+        b.classList.add('match');
+        var p = b;
+        while (p) {
+          if (p.classList.contains('fw-section')) p.classList.add('open');
+          if (p.classList.contains('fw-chapter')) p.classList.add('open');
+          if (p.classList.contains('fw-book')) p.classList.add('open');
+          p = p.parentElement;
+        }
+        b.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        break;
+      }
+    }
+    if (!query) {
+      var ms = document.querySelectorAll('.fw-bullet.match');
+      for (var j = 0; j < ms.length; j++) ms[j].classList.remove('match');
+    }
+  },
+
   _renderPapers: function() {
     var c = document.getElementById('page-papers'); if (!c) return;
     var tf = document.getElementById('paper-type-filter'), yf = document.getElementById('paper-year-filter');

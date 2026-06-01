@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
@@ -29,6 +29,9 @@
         <button class="nav-item" data-page="mock">
           <span class="nav-icon">&#128203;</span> 模拟试题
         </button>
+        <button class="nav-item" data-page="framework">
+          <span class="nav-icon">&#128214;</span> 背诵框架
+        </button>
         <button class="nav-item" data-page="papers">
           <span class="nav-icon">&#128196;</span> 历年真题
         </button>
@@ -58,6 +61,8 @@
 
       <div class="page" id="page-mistakes"><!-- JS ?? --></div>
 
+      <div class="page" id="page-framework"><!-- JS 渲染 --></div>
+
       <div class="page" id="page-papers">
         <div class="papers-filters">
           <select id="paper-year-filter"><option value="all">全部年份</option></select>
@@ -77,6 +82,7 @@
   <script src="js/data/xi-si.js"></script>
   <script src="js/data/english.js"></script>
   <script src="js/data/english-sentences.js"></script>
+  <script src="js/data/framework.js"></script>
   <script src="js/data/politics.js"></script>
   <script src="js/data/papers.js"></script>
   <script src="js/data/mock-exams.js"></script>
